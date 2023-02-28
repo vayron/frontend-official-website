@@ -301,15 +301,26 @@ onMounted(() => {
 
 nextTick(() => {
   try {
-    const video = document.querySelectorAll("video")[1];
-    
-    document.addEventListener(
-      "WeixinJSBridgeReady",
-      function () {
-        video?.play();
-      },
-      false
-    );
+    const ua:string = navigator.userAgent.toLowerCase();
+    // 判断在微信内才处理
+    if (process.client && (/MicroMessenger/i).test(ua) ) {
+      const obj: any = {};
+
+      const videoArray = document.querySelectorAll("video");
+      for (let i = 1; i < videoArray.length; i++) {
+        obj[`video${i}`] = videoArray[i];
+      }
+
+      document.addEventListener(
+        "WeixinJSBridgeReady",
+        function () {
+          for (let i = 1; i < videoArray.length; i++) {
+            obj[`video${i}`].play();
+          }
+        },
+        false
+      );
+    }
   } catch (e) {
     console.log(e);
   }
