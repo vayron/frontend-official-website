@@ -11,7 +11,6 @@
       <video
         loop
         muted
-        autoplay
         playsinline
         x5-playsinline
         webkit-playsinline="true"
@@ -216,10 +215,11 @@ useHead({
     {
       src: "/js/report.js",
       body: true,
-    },{
+    },
+    {
       src: "//res.wx.qq.com/open/js/jweixin-1.0.0.js",
       body: true,
-    }
+    },
   ],
 });
 
@@ -299,12 +299,21 @@ onMounted(() => {
   }
 });
 
-nextTick(()=>{
-  const video = document.querySelectorAll("video")[0];
-  document.addEventListener("WeixinJSBridgeReady", function () {
-     video.play()
-}, false);
-})
+nextTick(() => {
+  try {
+    const video = document.querySelectorAll("video")[1];
+    
+    document.addEventListener(
+      "WeixinJSBridgeReady",
+      function () {
+        video?.play();
+      },
+      false
+    );
+  } catch (e) {
+    console.log(e);
+  }
+});
 </script>
 
 <style lang="scss">
