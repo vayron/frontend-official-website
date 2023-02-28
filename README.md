@@ -28,7 +28,7 @@ bash start.sh
 docker build -t deepturing:latest .
 docker run -d -p 3002:3002 deepturing:latest
 
-/data/docker/nginx/frontend-official-website
+cd /data/docker/nginx/frontend-official-website
 docker build -t visionstory:latest .
 cd ~/tim/opscripts/docker &&  bash run_visionstory.sh
 
