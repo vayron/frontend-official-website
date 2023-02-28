@@ -217,7 +217,7 @@ useHead({
       src: "/js/report.js",
       body: true,
     },{
-      src: "http://res.wx.qq.com/open/js/jweixin-1.0.0.js",
+      src: "//res.wx.qq.com/open/js/jweixin-1.0.0.js",
       body: true,
     }
   ],
