@@ -18,14 +18,19 @@ npm install
 npm dev
 
 
+
+
 ### 远程启动
 git pull
 bash start.sh
 
 ### docker
 docker build -t deepturing:latest .
-
 docker run -d -p 3002:3002 deepturing:latest
+
+/data/docker/nginx/frontend-official-website
+docker build -t visionstory:latest .
+/tim/opscripts/docker 下 bash run_visionstory.sh
 
 docker images 
 

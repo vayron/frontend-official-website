@@ -5,6 +5,6 @@ export default defineNuxtConfig({
         cdnURL: 'https://cdn.visionstory.cn/www/' // 打包后资源文件放到 cdn 上的地址
     },
     experimental: {
-        writeEarlyHints: false,
+        writeEarlyHints: true,
     }
 })

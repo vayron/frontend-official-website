@@ -38,17 +38,12 @@
       <div class="comparison">
         <div class="list">
           <div class="video">
-            <video loop autoplay muted playsinline>
-              <source
-                type="video/mp4"
-                :src="comparisonData.sourceVideo"
-              /></video
+            <video loop autoplay muted playsinline webkit-playsinline="true" crossorigin="anonymous" :poster="comparisonData.sourcePoster" type="video/mp4" :src="comparisonData.sourceVideo"></video
             >原动作视频
           </div>
 
           <div class="video video-right">
-            <video loop autoplay muted playsinline>
-              <source type="video/mp4" :src="comparisonData.aigcVideo" /></video
+            <video loop autoplay muted playsinline webkit-playsinline="true" crossorigin="anonymous" :poster="comparisonData.aigcPoster" type="video/mp4" :src="comparisonData.aigcVideo"></video
             >AI生产视频
           </div>
         </div>
@@ -116,6 +111,7 @@
             id="text2Video"
             :src="seleteItem.url"
             type="video/mp4"
+            :poster="seleteItem.poster"
           ></video>
         </div>
       </div>
@@ -149,6 +145,7 @@
 <script lang="ts" setup>
 import { ref, nextTick, onMounted } from "vue";
 import { useState } from "nuxt/app";
+import { useAsset } from '~/lib/util';
 
 useHead({
   title: "迎接视频制作新时代",
@@ -180,7 +177,9 @@ useHead({
 
 const comparisonData = {
   sourceVideo: "//cdn.visionstory.cn/www/compare_source.mp4",
+  sourcePoster: useAsset("compare_source.jpg"),
   aigcVideo: "//cdn.visionstory.cn/www/compare_aigc.mp4",
+  aigcPoster: useAsset("compare_aigc.jpg"),
   userImg: "//cdn.visionstory.cn/www/compare_reference.png",
 };
 
@@ -188,14 +187,17 @@ const tabData: any = {
   国漫风: [
     {
       text: "主人公在空旷的野地上练功，缓慢且沉稳",
+      poster: useAsset("text2video_1.jpg"),
       url: "//cdn.visionstory.cn/www/text2video_1.mp4",
     },
     {
       text: "主人公独自一人在操场上打拳击，凶恨且愤怒",
+      poster: useAsset("text2video_2.jpg"),
       url: "//cdn.visionstory.cn/www/text2video_2.mp4",
     },
     {
       text: "主人公在聚光灯照射的舞台下跳中国古典舞",
+      poster: useAsset("text2video_3.jpg"),
       url: "//cdn.visionstory.cn/www/text2video_3.mp4",
     },
   ],

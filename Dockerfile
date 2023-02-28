@@ -9,10 +9,9 @@ ENV HOST 0.0.0.0
 EXPOSE 3000
 
 #RUN git pull
-RUN npm config set registry https://registry.npm.taobao.org
+RUN npm config set registry https://mirrors.cloud.tencent.com/npm/
 RUN npm install
-RUN npm run build 
-RUN cp -rf .output/public/offical-website/ ../cdn/www
+RUN npm run build
 
 CMD [ "npm", "start" ]
 
