@@ -4,5 +4,5 @@ export function useAsset(path: string): string {
     import: "default",
   });
   // @ts-expect-error: wrong type info
-  return assets["/assets/img/" + path];
+  return assets[path];
 }

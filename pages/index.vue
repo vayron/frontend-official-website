@@ -9,11 +9,14 @@
 
     <header>
       <video
-        autoplay
         loop
         muted
+        autoplay
         playsinline
+        x5-playsinline
+        webkit-playsinline="true"
         poster="//cdn.visionstory.cn/www/cover.png"
+        x5-video-player-type="h5-page"
       ></video>
       <!-- <div class="mask"></div> -->
       <div class="content">
@@ -23,7 +26,12 @@
         <div class="summary">
           上传角色2D图，输入文字脚本，见证全新视频的诞生
         </div>
-        <div class="btn" @click="onPop" data-track="contact_btn" id="contact_btn">
+        <div
+          class="btn"
+          @click="onPop"
+          data-track="contact_btn"
+          id="contact_btn"
+        >
           <span><i></i>联系我们</span>
         </div>
       </div>
@@ -38,12 +46,36 @@
       <div class="comparison">
         <div class="list">
           <div class="video">
-            <video loop autoplay muted playsinline webkit-playsinline="true" crossorigin="anonymous" :poster="comparisonData.sourcePoster" type="video/mp4" :src="comparisonData.sourceVideo"></video
+            <video
+              loop
+              muted
+              autoplay
+              playsinline
+              x5-playsinline
+              webkit-playsinline="true"
+              crossorigin="anonymous"
+              :poster="comparisonData.sourcePoster"
+              type="video/mp4"
+              :src="comparisonData.sourceVideo"
+              x5-video-player-type="h5-page"
+            ></video
             >原动作视频
           </div>
 
           <div class="video video-right">
-            <video loop autoplay muted playsinline webkit-playsinline="true" crossorigin="anonymous" :poster="comparisonData.aigcPoster" type="video/mp4" :src="comparisonData.aigcVideo"></video
+            <video
+              loop
+              muted
+              autoplay
+              playsinline
+              x5-playsinline
+              webkit-playsinline="true"
+              crossorigin="anonymous"
+              :poster="comparisonData.aigcPoster"
+              type="video/mp4"
+              :src="comparisonData.aigcVideo"
+              x5-video-player-type="h5-page"
+            ></video
             >AI生产视频
           </div>
         </div>
@@ -104,14 +136,17 @@
 
         <div class="text_to_video_image_container">
           <video
-            autoplay
             muted
+            autoplay
             playsinline
+            x5-playsinline
+            webkit-playsinline="true"
             class="w-full object-cover"
             id="text2Video"
             :src="seleteItem.url"
             type="video/mp4"
             :poster="seleteItem.poster"
+            x5-video-player-type="h5-page"
           ></video>
         </div>
       </div>
@@ -145,7 +180,7 @@
 <script lang="ts" setup>
 import { ref, nextTick, onMounted } from "vue";
 import { useState } from "nuxt/app";
-import { useAsset } from '~/lib/util';
+import { useAsset } from "~/lib/util";
 
 useHead({
   title: "迎接视频制作新时代",
@@ -160,26 +195,39 @@ useHead({
     },
     { property: "site_name", content: "AIGC-北京深度图灵科技有限公司" },
     { property: "al:ios:app_name", content: "AIGC-北京深度图灵科技有限公司" },
-    { property: "al:android:app_name", content: "AIGC-北京深度图灵科技有限公司" },
-    { property: "apple-mobile-web-app-title", content: "AIGC-北京深度图灵科技有限公司" },
+    {
+      property: "al:android:app_name",
+      content: "AIGC-北京深度图灵科技有限公司",
+    },
+    {
+      property: "apple-mobile-web-app-title",
+      content: "AIGC-北京深度图灵科技有限公司",
+    },
     { property: "og:type", content: "article" },
     { property: "og:site_name", content: "AIGC-北京深度图灵科技有限公司" },
   ],
-  link: [{ 
-    rel: 'dns-prefetch',
-    href: '//cdn.visionstory.cn'
-  }],
-  script: [{
-    src: '/js/report.js',
-    body: true,
-  }]
+  link: [
+    {
+      rel: "dns-prefetch",
+      href: "//cdn.visionstory.cn",
+    },
+  ],
+  script: [
+    {
+      src: "/js/report.js",
+      body: true,
+    },{
+      src: "http://res.wx.qq.com/open/js/jweixin-1.0.0.js",
+      body: true,
+    }
+  ],
 });
 
 const comparisonData = {
   sourceVideo: "//cdn.visionstory.cn/www/compare_source.mp4",
-  sourcePoster: useAsset("compare_source.jpg"),
+  sourcePoster: useAsset("/assets/img/compare_source.jpg"),
   aigcVideo: "//cdn.visionstory.cn/www/compare_aigc.mp4",
-  aigcPoster: useAsset("compare_aigc.jpg"),
+  aigcPoster: useAsset("/assets/img/compare_aigc.jpg"),
   userImg: "//cdn.visionstory.cn/www/compare_reference.png",
 };
 
@@ -187,17 +235,17 @@ const tabData: any = {
   国漫风: [
     {
       text: "主人公在空旷的野地上练功，缓慢且沉稳",
-      poster: useAsset("text2video_1.jpg"),
+      poster: useAsset("/assets/img/text2video_1.jpg"),
       url: "//cdn.visionstory.cn/www/text2video_1.mp4",
     },
     {
       text: "主人公独自一人在操场上打拳击，凶恨且愤怒",
-      poster: useAsset("text2video_2.jpg"),
+      poster: useAsset("/assets/img/text2video_2.jpg"),
       url: "//cdn.visionstory.cn/www/text2video_2.mp4",
     },
     {
       text: "主人公在聚光灯照射的舞台下跳中国古典舞",
-      poster: useAsset("text2video_3.jpg"),
+      poster: useAsset("/assets/img/text2video_3.jpg"),
       url: "//cdn.visionstory.cn/www/text2video_3.mp4",
     },
   ],
@@ -250,6 +298,13 @@ onMounted(() => {
     );
   }
 });
+
+nextTick(()=>{
+  const video = document.querySelectorAll("video")[0];
+  document.addEventListener("WeixinJSBridgeReady", function () {
+     video.play()
+}, false);
+})
 </script>
 
 <style lang="scss">

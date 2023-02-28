@@ -30,7 +30,7 @@ docker run -d -p 3002:3002 deepturing:latest
 
 /data/docker/nginx/frontend-official-website
 docker build -t visionstory:latest .
-/tim/opscripts/docker 下 bash run_visionstory.sh
+cd ~/tim/opscripts/docker &&  bash run_visionstory.sh
 
 docker images 
 
