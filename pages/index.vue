@@ -185,6 +185,11 @@ useHead({
   title: "迎接视频制作新时代",
   meta: [
     {
+      name: "viewport",
+      content:
+        "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0",
+    },
+    {
       property: "og:title",
       content: `北京深度图灵科技有限公司 - 迎接视频制作新时代`,
     },
@@ -225,9 +230,9 @@ useHead({
 
 const comparisonData = {
   sourceVideo: "//cdn.visionstory.cn/www/compare_source.mp4",
-  sourcePoster: useAsset("/assets/img/compare_source.jpg"),
+  sourcePoster: useAsset("/assets/img/compare_source.webp"),
   aigcVideo: "//cdn.visionstory.cn/www/compare_aigc.mp4",
-  aigcPoster: useAsset("/assets/img/compare_aigc.jpg"),
+  aigcPoster: useAsset("/assets/img/compare_aigc.webp"),
   userImg: "//cdn.visionstory.cn/www/compare_reference.png",
 };
 
@@ -235,17 +240,17 @@ const tabData: any = {
   国漫风: [
     {
       text: "主人公在空旷的野地上练功，缓慢且沉稳",
-      poster: useAsset("/assets/img/text2video_1.jpg"),
+      poster: useAsset("/assets/img/text2video_1.webp"),
       url: "//cdn.visionstory.cn/www/text2video_1.mp4",
     },
     {
       text: "主人公独自一人在操场上打拳击，凶恨且愤怒",
-      poster: useAsset("/assets/img/text2video_2.jpg"),
+      poster: useAsset("/assets/img/text2video_2.webp"),
       url: "//cdn.visionstory.cn/www/text2video_2.mp4",
     },
     {
       text: "主人公在聚光灯照射的舞台下跳中国古典舞",
-      poster: useAsset("/assets/img/text2video_3.jpg"),
+      poster: useAsset("/assets/img/text2video_3.webp"),
       url: "//cdn.visionstory.cn/www/text2video_3.mp4",
     },
   ],
@@ -286,6 +291,17 @@ const playNextVideo = () => {
   }
 };
 
+const getWechat = (): boolean => {
+  let isWechat = false;
+  if (process.client) {
+    const ua: string = navigator.userAgent.toLowerCase();
+    if (/MicroMessenger/i.test(ua)) {
+      isWechat = true;
+    }
+  }
+  return isWechat;
+};
+
 onMounted(() => {
   if (process.client) {
     const video: any = document?.getElementById("text2Video");
@@ -302,14 +318,8 @@ onMounted(() => {
 nextTick(() => {
   try {
     // 判断在微信内才处理
-    if (process.client) {
-      const ua:string = navigator.userAgent.toLowerCase();
-
-      if(!(/MicroMessenger/i).test(ua)){
-        return
-      } 
+    if (process.client && getWechat()) {
       const obj: any = {};
-
       const videoArray = document.querySelectorAll("video");
       for (let i = 1; i < videoArray.length; i++) {
         obj[`video${i}`] = videoArray[i];
@@ -319,8 +329,8 @@ nextTick(() => {
         "WeixinJSBridgeReady",
         function () {
           for (let i = 1; i < videoArray.length; i++) {
-            obj[`video${i}`].play();
-          }
+          obj[`video${i}`].play();
+        }
         },
         false
       );
