@@ -1,9 +1,9 @@
 module.exports = {
     apps: [
       {
-        name: 'Deepturing',
+        name: 'visionstory',
         exec_mode: 'cluster',
-        instances: '4',
+        instances: '8',
         script: './.output/server/index.mjs',
         args: 'start'
       }

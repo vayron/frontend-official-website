@@ -301,9 +301,13 @@ onMounted(() => {
 
 nextTick(() => {
   try {
-    const ua:string = navigator.userAgent.toLowerCase();
     // 判断在微信内才处理
-    if (process.client && (/MicroMessenger/i).test(ua) ) {
+    if (process.client) {
+      const ua:string = navigator.userAgent.toLowerCase();
+
+      if(!(/MicroMessenger/i).test(ua)){
+        return
+      } 
       const obj: any = {};
 
       const videoArray = document.querySelectorAll("video");
